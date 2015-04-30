@@ -1,0 +1,26 @@
+{
+  "name": "cloudformer-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "stack-delete": "./bin/stack-delete",
+    "stack-apply": "./bin/stack-apply",
+    "stack-outputs": "./bin/stack-outputs"
+  },
+  "author": {
+    "name": "Michael Gannon",
+    "email": "michael.gannon@gmail.com"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/mgannon/commander.js",
+  "files": [
+    "bin",
+    "index.js"
+  ],
+  "dependencies": {
+    "aws-sdk": "^2.1.21",
+    "commander": "^2.8.1",
+    "lodash": "^3.6.0"
+  }
+}

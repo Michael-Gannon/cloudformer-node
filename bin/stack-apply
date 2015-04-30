@@ -1,0 +1,62 @@
+#!/usr/bin/env node
+
+var program = require('commander'),
+    Stack = require('../index');
+
+var keyValueList = function(val) {
+  var parameters = {};
+  val.split(',').forEach(function(pair) {
+    var arr = pair.split('=');
+    parameters[arr[0]] = arr[1];
+  });
+
+  return parameters;
+}
+
+var list = function(val)  {
+  return val.split(',')
+}
+
+program
+  .version('0.0.1')
+  .usage('[options] <stackname ...>')
+  .option('-f, --templateFile <path>', 'The CloudFormation template file')
+  .option('-p, --parameters <parameters>', 'A parameter list in the format k=v,k=v', keyValueList)
+  .option('-d, --disableRollback', 'Disable rollback on failure of a create operation')
+  .option('-c, --capabilities <list>', 'Any Capabilities to enable with the template eg CAPABILITY_IAM', list)
+  .option('-n, --notificationARNs <list>', 'The Simple Notification Service (SNS) topic ARNs to publish stack related events', list)
+  .option('-t, --tags <list>', 'A set of user-defined Tags to associate with this stack in the format k=v,k=v', keyValueList)
+  .parse(process.argv);
+
+var stackName = program.args.shift();
+
+if (!stackName) {
+  program.outputHelp();
+  return process.exit(1);
+}
+
+var options = ({
+  Parameters: program.parameters || {},
+  DisableRollback: program.disableRollback || false,
+  Capabilities: program.capabilities,
+  NotificationARNs: program.notificationARNs,
+  Tags: program.tags || {}
+});
+
+new Stack(stackName).apply(program.templateFile, options, function(err, successful) {
+  if(err) {
+    console.error(err);
+    return process.exit(1);
+  }
+
+  process.exit(0);
+});
+
+//script to bind to stack-apply stackname -t ./template.json -d -c [CAPABILITY_IAM] -p k=v k=v -n [arns, arns] -t [tags,tags]
+
+// s.apply('/Users/mikgan/Workspace/Dius/Bauer/cloudformer/samples/basic_template.json',
+//   {Parameters: {AmiId: 'ami-fd9cecc7'}},
+//   function(err, data) {
+//     console.log("err:"+err);
+//     console.log("data:"+data);
+// });

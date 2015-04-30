@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+var program = require('commander'),
+    Stack = require('../index');
+
+program
+  .version('0.0.1')
+  .usage('<stackname ...>')
+  .parse(process.argv);
+
+var stackName = program.args.shift();
+
+if (!stackName) {
+  program.outputHelp();
+  return process.exit(1);
+}
+
+new Stack(stackName).delete(function(err, successful) {
+  if(err) {
+    console.error(err);
+    return process.exit(2);
+  }
+
+  process.exit(0);
+})
