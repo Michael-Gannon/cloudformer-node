@@ -51,12 +51,3 @@ new Stack(stackName).apply(program.templateFile, options, function(err, successf
 
   process.exit(0);
 });
-
-//script to bind to stack-apply stackname -t ./template.json -d -c [CAPABILITY_IAM] -p k=v k=v -n [arns, arns] -t [tags,tags]
-
-// s.apply('/Users/mikgan/Workspace/Dius/Bauer/cloudformer/samples/basic_template.json',
-//   {Parameters: {AmiId: 'ami-fd9cecc7'}},
-//   function(err, data) {
-//     console.log("err:"+err);
-//     console.log("data:"+data);
-// });
