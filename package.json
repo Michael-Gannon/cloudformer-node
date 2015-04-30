@@ -1,19 +1,18 @@
 {
   "name": "cloudformer-node",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A port of the Ruby AWS CloudFormation tooling https://github.com/kunday/cloudformer",
   "main": "index.js",
   "bin": {
     "stack-delete": "./bin/stack-delete",
-    "stack-apply": "./bin/stack-apply",
-    "stack-outputs": "./bin/stack-outputs"
+    "stack-apply": "./bin/stack-apply"
   },
   "author": {
     "name": "Michael Gannon",
     "email": "michael.gannon@gmail.com"
   },
   "license": "MIT",
-  "homepage": "https://github.com/mgannon/commander.js",
+  "homepage": "https://github.com/Michael-Gannon/cloudformer-node",
   "files": [
     "bin",
     "index.js"

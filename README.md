@@ -2,24 +2,28 @@
 
 A port of the Ruby AWS CloudFormation tooling https://github.com/kunday/cloudformer
 
-####To install:
+## Installation:
 
-  npm install cloudformer-node -g
+```bash
+$ npm install cloudformer-node -g
+````
 
-###JS Usage:
+## JS Usage:
 
-  var s = new Stack('tooling-test');
-  s.delete(console.log);
-  s.apply('./samples/basic_template.json', {
-      Parameters: { AmiId: 'ami-fd9cecc7' },
-      DisableRollback: false,
-      Capabilities: [],
-      NotificationARNs: [],
-      Tags: { Name: 'mystack' }
-    }, console.log);
+```js
+var stack = new Stack('tooling-test');
+stack.delete(console.log);
+stack.apply('./samples/basic_template.json', {
+  Parameters: { AmiId: 'ami-fd9cecc7' },
+  DisableRollback: false,
+  Capabilities: [],
+  NotificationARNs: [],
+  Tags: { Name: 'mystack' }
+}, console.log);
+```
 
-###CLI Usage:
-
+## CLI Usage:
+```bash
   stack-apply -h
   stack-delete -h
-
+```
