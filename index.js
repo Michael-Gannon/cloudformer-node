@@ -64,6 +64,27 @@ Stack.prototype.delete = function(cb) {
   });
 };
 
+Stack.prototype.outputs = function(cb) {
+  var self = this;
+  self.isDeployed(function(err, deployed) {
+    if(!deployed) {
+      return cb('Stack not up.', null);
+    }
+
+    cf.describeStacks({StackName: self.stackName }, function(err, data) {
+      if(err) {
+        return cb(err.message, null);
+      } else if(data.Stacks.length > 1) {
+        return cb('Unable to find unique stack by name \'' + self.stackName + '\'', false);
+      }
+
+      var outputs = {};
+      var AWSOutputs = data.Stacks[0].Outputs;
+      AWSOutputs.forEach(function(output) { outputs[output.OutputKey] = output.OutputValue; });
+      cb(null, outputs);
+    });
+  });
+};
 
 Stack.prototype.update = function(template, options, cb) {
   var self = this;
