@@ -1,6 +1,6 @@
 # cloudformer-node
 
-A port of the Ruby AWS CloudFormation tooling https://github.com/kunday/cloudformer
+A port of the Ruby AWS CloudFormation tooling [https://github.com/kunday/cloudformer](https://github.com/kunday/cloudformer)
 
 ## Installation:
 

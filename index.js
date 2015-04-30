@@ -34,7 +34,7 @@ Stack.prototype.apply = function(templateFile, options, cb) {
   var template = fs.readFileSync(templateFile).toString();
   self.isValidTemplate(template, function(err, valid) {
     if(!valid) {
-      return cb('Unable to update - ' + err, false);
+      return cb('Unable to update ' + self.stackName + ' - ' + err, false);
     }
 
     self.isDeployed(function(err, deployed) {
@@ -51,7 +51,7 @@ Stack.prototype.apply = function(templateFile, options, cb) {
 
 Stack.prototype.delete = function(cb) {
   var self = this;
-  console.log('Deleting stack...');
+  console.log('Deleting stack ' + self.stackName + '...');
   cf.deleteStack({StackName: self.stackName}, function(err, data) {
     self.waitUntilEnd(function(err, succeeded) {
       if(/Stack:.*does not exist/.test(err) || /Stack not up/.test(err)) {
@@ -67,7 +67,7 @@ Stack.prototype.delete = function(cb) {
 
 Stack.prototype.update = function(template, options, cb) {
   var self = this;
-  console.log('Initializing stack update...');
+  console.log('Initializing stack update of ' + self.stackName + '...');
   options.StackName =  self.stackName;
   options.TemplateBody = template;
   cf.updateStack(options, function(err, data) {
@@ -96,7 +96,7 @@ Stack.prototype.update = function(template, options, cb) {
 
 Stack.prototype.create = function(template, options, cb) {
   var self = this;
-  console.log('Initializing stack creation...');
+  console.log('Initializing stack creation of ' + self.stackName + '...');
   options.StackName =  self.stackName;
   options.TemplateBody = template;
 
@@ -212,17 +212,5 @@ Stack.prototype.isDeploySuccessful = function(cb) {
     return cb(null, true);
   });
 };
-
-// var s = new Stack('mik-tooling-test');
-// s.delete(console.log);
-// s.apply('/Users/mikgan/Workspace/Dius/Bauer/cloudformer/samples/basic_template.json',
-//   {Parameters: {AmiId: 'ami-fd9cecc7'}},
-//   function(err, data) {
-//     console.log("err:"+err);
-//     console.log("data:"+data);
-// });
-
-//script to bind to stack-delete stackname
-//script to bind to stack-apply stackname -t ./template.json -d -c [CAPABILITY_IAM] -p k=v k=v -n [arns, arns] -t [tags,tags]
 
 module.exports = Stack;
