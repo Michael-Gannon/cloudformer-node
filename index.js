@@ -92,11 +92,11 @@ Stack.prototype.update = function(template, options, cb) {
   options.StackName =  self.stackName;
   options.TemplateBody = template;
   cf.updateStack(options, function(err, data) {
-    if(err && !/No updates are to be performed/.test(err.message)) {
-      return cb(err.message, false);
-    } else if(/No updates are to be performed/.test(err.message)) {
+    if(err && /No updates are to be performed/.test(err.message)) {
       console.log(err.message);
       return cb(null, true);
+    } else if(err) {
+      return cb(err.message, false);
     }
 
     setTimeout(function() {
