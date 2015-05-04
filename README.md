@@ -15,7 +15,7 @@ $ npm install cloudformer-node -g
 Cloudformer depends on the aws-sdk module to query AWS API. You will need to export AWS configuration to environment variables to your .bashrc/.bash_profile or your build server:
 
     export AWS_ACCESS_KEY=your access key
-    export AWS_REGION=ap-southeast-2
+    export AWS_DEFAULT_REGION=ap-southeast-2
     export AWS_SECRET_ACCESS_KEY=your secret access key
 
 ## JS Usage:
