@@ -22,7 +22,6 @@ Cloudformer depends on the aws-sdk module to query AWS API. You will need to exp
 
 ```js
 var stack = new Stack('tooling-test');
-stack.delete(console.log);
 stack.apply('./samples/basic_template.json', {
   Parameters: { AmiId: 'ami-fd9cecc7' },
   DisableRollback: false,
@@ -30,11 +29,16 @@ stack.apply('./samples/basic_template.json', {
   NotificationARNs: [],
   Tags: { Name: 'mystack' }
 }, console.log);
+
+stack.outputs(console.log);
+
+stack.delete(console.log);
 ```
 
 ## CLI Usage:
 ```bash
   stack-apply -h
+  stack-outputs -h
   stack-delete -h
 ```
 
