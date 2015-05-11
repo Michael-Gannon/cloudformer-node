@@ -1,5 +1,20 @@
 var AWS = require('aws-sdk');
-AWS.config.update({region: process.env['AWS_DEFAULT_REGION'] || 'us-west-2'});
+
+var HttpProxyAgent = require('http-proxy-agent');
+var httpOptions = {};
+
+var http_proxy = process.env.HTTP_PROXY || process.env.http_proxy;
+var https_proxy = process.env.HTTPS_PROXY || process.env.https_proxy;
+
+if(http_proxy || https_proxy) {
+  var httpProxy = new HttpProxyAgent(http_proxy || https_proxy);
+  httpOptions.proxy = httpProxy;
+}
+
+AWS.config.update({
+  region: process.env['AWS_DEFAULT_REGION'] || 'us-west-2',
+  httpOptions: httpOptions
+});
 
 var fs = require('fs'),
     cf = new AWS.CloudFormation(),
