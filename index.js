@@ -69,7 +69,7 @@ Stack.prototype.delete = function(cb) {
   console.log('Deleting stack ' + self.stackName + '...');
   cf.deleteStack({StackName: self.stackName}, function(err, data) {
     self.waitUntilEnd(function(err, succeeded) {
-      if(/Stack:.*does not exist/.test(err) || /Stack not up/.test(err)) {
+      if(/Stack:?.*does not exist/.test(err) || /Stack not up/.test(err)) {
         console.log('Delete complete');
         return cb(null, true);
       }
