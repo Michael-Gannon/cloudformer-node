@@ -2,7 +2,12 @@
   "name": "cloudformer-node",
   "version": "0.0.12",
   "description": "A port of the Ruby AWS CloudFormation tooling https://github.com/kunday/cloudformer",
-  "keywords": ["CloudFormation", "AWS", "cli", "command line"],
+  "keywords": [
+    "CloudFormation",
+    "AWS",
+    "cli",
+    "command line"
+  ],
   "main": "index.js",
   "bin": {
     "stack-delete": "./bin/stack-delete",
@@ -26,7 +31,7 @@
   "dependencies": {
     "aws-sdk": "^2.1.21",
     "commander": "^2.8.1",
-    "http-proxy-agent": "^0.2.6",
-    "lodash": "^3.6.0"
+    "http-proxy-agent": "^2.1.0",
+    "lodash": "^4.17.15"
   }
 }
